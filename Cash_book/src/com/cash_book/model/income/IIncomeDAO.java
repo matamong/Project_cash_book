@@ -1,6 +1,6 @@
-package com.cash_book.controller.member;
+package com.cash_book.model.income;
 
-public interface IMemberDTO {
+public interface IIncomeDAO {
 	public String[] select(String sql);
 	public boolean insert(String sql);
 	public boolean delete(String sql);
