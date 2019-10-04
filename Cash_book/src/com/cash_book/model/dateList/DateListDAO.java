@@ -3,9 +3,9 @@ package com.cash_book.model.dateList;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cash_book.model.IDAO;
+import com.cash_book.model.AbstractDAO;
 
-public class DateListDAO implements IDAO {
+public class DateListDAO extends AbstractDAO {
 // SELECT
 	@Override
 	public List<String> select(String sql) {

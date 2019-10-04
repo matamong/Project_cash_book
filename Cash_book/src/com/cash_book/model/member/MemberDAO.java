@@ -3,9 +3,9 @@ package com.cash_book.model.member;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cash_book.model.IDAO;
+import com.cash_book.model.AbstractDAO;
 
-public class MemberDAO implements IDAO {
+public class MemberDAO extends AbstractDAO {
 // SELECT
 	@Override
 	public List<String> select(String sql) {
