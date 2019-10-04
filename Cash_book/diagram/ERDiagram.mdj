@@ -465,28 +465,13 @@
 											"top": 459,
 											"width": 254,
 											"height": 13
-										},
-										{
-											"_type": "ERDColumnView",
-											"_id": "AAAAAAFtinSH8GcOsjc=",
-											"_parent": {
-												"$ref": "AAAAAAFtinGZe2bzWqE="
-											},
-											"model": {
-												"$ref": "AAAAAAFtinSHw2cLIzE="
-											},
-											"font": "Arial;13;0",
-											"left": 445,
-											"top": 474,
-											"width": 254,
-											"height": 13
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 440,
 									"top": 439,
 									"width": 264,
-									"height": 53
+									"height": 38
 								}
 							],
 							"font": "Arial;13;0",
@@ -525,7 +510,7 @@
 							"top": 416,
 							"width": 296,
 							"height": 120,
-							"text": "<PK>\nID : PHONE + DATE"
+							"text": "<PK>\nPHONE + DATE\n\n<FK>\nPHONE"
 						},
 						{
 							"_type": "UMLNoteView",
@@ -538,7 +523,7 @@
 							"top": 760,
 							"width": 345,
 							"height": 104,
-							"text": "<PK>\nINCOME_ID : PHONE + DATE + INCOME_INDEX\n"
+							"text": "<FK>\nPHONE + DATE + INCOME_INDEX\n"
 						},
 						{
 							"_type": "ERDRelationshipView",
@@ -1098,16 +1083,6 @@
 							"name": "PHONE",
 							"type": "VARCHAR2",
 							"length": "11"
-						},
-						{
-							"_type": "ERDColumn",
-							"_id": "AAAAAAFtinSHw2cLIzE=",
-							"_parent": {
-								"$ref": "AAAAAAFtinGZembvXHw="
-							},
-							"name": "ID",
-							"type": "VARCHAR2",
-							"length": "19"
 						}
 					]
 				}
