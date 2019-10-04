@@ -5,12 +5,16 @@ import java.util.List;
 
 import com.cash_book.model.GetableAttributeNamesDTO;
 
+// Static Factory Method Pattern
+// 		(DTO 필드변수 자료형의 정보은닉을 위한 목적)
 public class MemberDTO extends GetableAttributeNamesDTO {
 	private String id;
 	private String pw;
 	private String phone;
 	
-	public MemberDTO(String _id, String _pw, String _phone) {
+	
+// 생성자
+	private MemberDTO(String _id, String _pw, String _phone) {
 		super("MEMBER");
 		this.id = _id;
 		this.pw = _pw;
@@ -18,12 +22,13 @@ public class MemberDTO extends GetableAttributeNamesDTO {
 	}
 	
 	
-	@Override
-	public String getTableName() {
-		return tableName;
+// Instance Factory
+	public static MemberDTO create(String _id, String _pw, String _phone) {
+		return new MemberDTO(_id, _pw, _phone);
 	}
-	
-	
+
+
+// getter Names
 	@Override
 	public List<String> getAttributeNames() {
 		List<String> names = new ArrayList<String>();
@@ -35,6 +40,7 @@ public class MemberDTO extends GetableAttributeNamesDTO {
 	}
 	
 	
+// getter Values
 	@Override
 	public List<String> getAttributeValues() {
 		List<String> values = new ArrayList<String>();
