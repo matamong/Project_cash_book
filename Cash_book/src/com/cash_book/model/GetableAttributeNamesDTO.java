@@ -3,21 +3,23 @@ package com.cash_book.model;
 import java.util.List;
 
 public abstract class GetableAttributeNamesDTO {
-	protected String tableName;
+	private String tableName;
 	
 	
 // 생성자
-	public GetableAttributeNamesDTO(String _tableName) {
+	protected GetableAttributeNamesDTO(String _tableName) {
 		this.tableName = _tableName;
 	}
 	
 	
-// Getter tableName
-	abstract public String getTableName();
+// getter tableName
+	public String getTableName() {
+		return tableName;
+	}
 	
-// Getter attributeNames
+// getter attributeNames
 	abstract public List<String> getAttributeNames();
 	
-// Getter attributeValues
+// getter attributeValues
 	abstract public List<String> getAttributeValues();
 }
