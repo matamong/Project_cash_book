@@ -424,7 +424,7 @@
 									"top": 421,
 									"width": 264,
 									"height": 13,
-									"text": "InfoList"
+									"text": "DataList"
 								},
 								{
 									"_type": "ERDColumnCompartmentView",
@@ -1019,7 +1019,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFtikYCImYk48o="
 					},
-					"name": "InfoList",
+					"name": "DataList",
 					"ownedElements": [
 						{
 							"_type": "ERDRelationship",
@@ -1544,7 +1544,7 @@
 											"top": 271,
 											"width": 198,
 											"height": 13,
-											"text": "InfoList"
+											"text": "DataList"
 										},
 										{
 											"_type": "LabelView",
@@ -3206,7 +3206,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFtlYK4Uz8tyEk="
 					},
-					"name": "InfoList",
+					"name": "DataList",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
