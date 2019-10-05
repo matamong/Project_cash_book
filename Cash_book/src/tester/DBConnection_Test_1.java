@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 import com.cash_book.model.dbConnection.DBConnection;
 
-// DBConnection ÀÌ¿ëÇÑ DBÁ¢¼Ó Å×½ºÅÍ
+// DBConnection ì´ìš©í•œ DBì ‘ì† í…ŒìŠ¤í„°
 public class DBConnection_Test_1 {
 	public static void main(String[] args) {
 		Connection connection = DBConnection.getConnection();

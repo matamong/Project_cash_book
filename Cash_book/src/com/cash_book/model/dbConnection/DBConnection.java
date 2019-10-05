@@ -25,11 +25,11 @@ public class DBConnection {
 	}
 	
 	
-// »ı¼ºÀÚ
+// ìƒì„±ì
 	private DBConnection() { }
 	
 	
-// Connection ÃÊ±âÈ­
+// Connection ì´ˆê¸°í™”
 	private static void initConnector() {
 		try {
 			dataSource = new OracleDataSource();
@@ -39,10 +39,10 @@ public class DBConnection {
 			
 			connection = dataSource.getConnection();
 			
-			System.out.println("** " + USER + " °èÁ¤ Á¢¼Ó ¿Ï·á **");
+			System.out.println("** " + USER + " ê³„ì • ì ‘ì† ì™„ë£Œ **");
 			
 		} catch(SQLException e) {
-			System.out.println("Á¢¼Ó¿¡·¯ : " + e.getMessage());
+			System.out.println("ì ‘ì†ì—ëŸ¬ : " + e.getMessage());
 		}
 	}
 	
@@ -54,54 +54,54 @@ public class DBConnection {
 	}
 	
 	
-// Connection ÇØÁ¦
+// Connection í•´ì œ
 	public static void closeConnection() {
 		if(connection != null) {
 			try {
 				connection.close();
-				System.out.println("Connection ÇØÁ¦ ¿Ï·á");
+				System.out.println("Connection í•´ì œ ì™„ë£Œ");
 				
 			} catch(SQLException e) {
-				System.out.println("Connection ÇØÁ¦ ¿¡·¯ : " + e.getMessage());
+				System.out.println("Connection í•´ì œ ì—ëŸ¬ : " + e.getMessage());
 			}
 		}
 	}
 	
-// Statement ÇØÁ¦
+// Statement í•´ì œ
 	public static void close(Statement statement) {
 		if(statement != null) {
 			try {
 				statement.close();
-				System.out.println("Statement ÇØÁ¦ ¿Ï·á");
+				System.out.println("Statement í•´ì œ ì™„ë£Œ");
 				
 			} catch(SQLException e) {
-				System.out.println("Statement ÇØÁ¦ ¿¡·¯ : " + e.getMessage());
+				System.out.println("Statement í•´ì œ ì—ëŸ¬ : " + e.getMessage());
 			}
 		}
 	}
 	
-// PreparedStatement ÇØÁ¦
+// PreparedStatement í•´ì œ
 	public static void close(PreparedStatement preparedStatement) {
 		if(preparedStatement != null) {
 			try {
 				preparedStatement.close();
-				System.out.println("PreparedStatement ÇØÁ¦ ¿Ï·á");
+				System.out.println("PreparedStatement í•´ì œ ì™„ë£Œ");
 				
 			} catch(SQLException e) {
-				System.out.println("PreparedStatement ÇØÁ¦ ¿¡·¯ : " + e.getMessage());
+				System.out.println("PreparedStatement í•´ì œ ì—ëŸ¬ : " + e.getMessage());
 			}
 		}
 	}
 	
-// ResultSet ÇØÁ¦
+// ResultSet í•´ì œ
 	public static void close(ResultSet resultSet) {
 		if(resultSet != null) {
 			try {
 				resultSet.close();
-				System.out.println("ResultSet ÇØÁ¦ ¿Ï·á");
+				System.out.println("ResultSet í•´ì œ ì™„ë£Œ");
 				
 			} catch(SQLException e) {
-				System.out.println("ResultSet ÇØÁ¦ ¿¡·¯ : " + e.getMessage());
+				System.out.println("ResultSet í•´ì œ ì—ëŸ¬ : " + e.getMessage());
 			}
 		}
 	}
