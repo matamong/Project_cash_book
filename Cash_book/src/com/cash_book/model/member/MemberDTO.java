@@ -44,9 +44,9 @@ public class MemberDTO extends GetableAttributeNamesDTO {
 	@Override
 	public List<String> getAttributeNames() {
 		List<String> names = new ArrayList<String>();
-		names.add("phone");
-		names.add("name");
-		names.add("pw");
+		names.add("PHONE");
+		names.add("NAME");
+		names.add("PW");
 		
 		return names;
 	}
