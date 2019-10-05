@@ -1,16 +1,50 @@
 package com.cash_book.model.member;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.cash_book.model.AbstractDAO;
+import com.cash_book.model.GetableAttributeNamesDTO;
 
 public class MemberDAO extends AbstractDAO {
+	
+	
+// 생성자
+	public MemberDAO(Connection connection, GetableAttributeNamesDTO dto) {
+		super(connection, dto);
+	}
+	
+	
 // SELECT
 	@Override
-	public List<String> select(String sql) {
+	public GetableAttributeNamesDTO select(String sql) {
+		String combinedSQL = "SELECT * FROM " + 
+							 super.getDTO().getTableName() + " " +
+							 sql;
 		
-		return new ArrayList<String>();		
+		try {
+			PreparedStatement preparedStatement = 
+							super.getConnection().prepareStatement(combinedSQL);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			
+		} catch(SQLException e) {
+			System.out.println("MemberDAO Err] " + e.getMessage());
+		}
+		
+		return super.getDTO();
+	}
+	
+// SELECT ( Map<String, String> )
+	public Map<String, String> selectReturnMap(String sql) {
+		Map<String, String> result = new HashMap<String, String>();
+		
+		
+		return result;
 	}
 	
 	

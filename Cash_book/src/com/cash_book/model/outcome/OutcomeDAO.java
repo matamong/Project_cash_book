@@ -1,16 +1,24 @@
 package com.cash_book.model.outcome;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.cash_book.model.AbstractDAO;
+import com.cash_book.model.GetableAttributeNamesDTO;
 
 public class OutcomeDAO extends AbstractDAO {
+	
+// 생성자
+	public OutcomeDAO(Connection connection, GetableAttributeNamesDTO dto) {
+		super(connection, dto);
+	}
+	
 // SELECT
 	@Override
-	public List<String> select(String sql) {
+	public GetableAttributeNamesDTO select(String sql) {
 		
-		return new ArrayList<String>();
+		return super.getDTO();
 	}
 	
 	

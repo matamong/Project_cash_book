@@ -51,11 +51,11 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 	
 // 생성자 
 	private OutcomeDTO(String _outcomePhone,
-					String _outcomeLocalDate,
-					int _outcomeIndex,
-					String _outcomeName,
-					Money _outcomeAmount,
-					String _outcomeMemo) {
+					   String _outcomeLocalDate,
+					   int _outcomeIndex,
+					   String _outcomeName,
+					   Money _outcomeAmount,
+					   String _outcomeMemo) {
 		super("OUTCOME");
 		this.outcomePhone = _outcomePhone;
 		this.outcomeLocalDate = _outcomeLocalDate;
