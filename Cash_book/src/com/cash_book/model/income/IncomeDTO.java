@@ -72,9 +72,8 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 							String _incomeIndex,
 							String _incomeName,
 							String _incomeAmount,
-							String _incomeMemo) {
-		int index = Integer.parseInt(_incomeIndex);
-		Money amount = Money.wons(_incomeAmount);
+							String _incomeMemo) 
+					 throws ClassCastException {
 		
 		return (_incomePhone.length() <= INCOME_PHONE_MAX_LENGTH)
 					&& (_incomeLocalDate.length() <= INCOME_LOCAL_DATE_MAX_LENGTH)
@@ -84,9 +83,9 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 					&& (_incomeMemo.length() <= INCOME_MEMO_MAX_LENGTH)
 					? new IncomeDTO(_incomePhone,
 									_incomeLocalDate,
-									index,
+									Integer.parseInt(_incomeIndex),
 									_incomeName,
-									amount,
+									Money.wons(_incomeAmount),
 									_incomeMemo) : null;
 	}
 	

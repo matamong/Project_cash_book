@@ -72,9 +72,8 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 							 String _outcomeIndex,
 							 String _outcomeName,
 							 String _outcomeAmount,
-							 String _outcomeMemo) {
-		int index = Integer.parseInt(_outcomeIndex);
-		Money amount = Money.wons(_outcomeAmount);
+							 String _outcomeMemo) 
+					  throws ClassCastException {
 		
 		return (_outcomePhone.length() <= OUTCOME_PHONE_MAX_LENGTH)
 					&& (_outcomeLocalDate.length() <= OUTCOME_LOCAL_DATE_MAX_LENGTH)
@@ -84,9 +83,9 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 					&& (_outcomeMemo.length() <= OUTCOME_MEMO_MAX_LENGTH)
 					? new OutcomeDTO(_outcomePhone,
 									 _outcomeLocalDate,
-									 index,
+									 Integer.parseInt(_outcomeIndex),
 									 _outcomeName,
-									 amount,
+									 Money.wons(_outcomeAmount),
 									 _outcomeMemo) : null;
 	}
 	
