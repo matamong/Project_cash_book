@@ -55,9 +55,9 @@ public class MemberDTO extends GetableAttributeNamesDTO {
 	@Override
 	public List<String> getAttributeNames() {
 		List<String> names = new ArrayList<String>();
-		names.add("PHONE");
-		names.add("NAME");
-		names.add("PW");
+		names.add(PHONE_NAME);
+		names.add(NAME_NAME);
+		names.add(PW_NAME);
 		
 		return names;
 	}
@@ -76,6 +76,7 @@ public class MemberDTO extends GetableAttributeNamesDTO {
 	
 	
 // getter Map ( Map<String, String> )
+	@Override
 	public Map<String, String> getAttributeMap() {
 		Map<String, String> values = new HashMap<String, String>();
 		values.put(PHONE_NAME, phone);

@@ -8,6 +8,8 @@ import java.util.Map;
 import com.cash_book.model.GetableAttributeNamesDTO;
 import com.cash_book.model.Money;
 
+//Static Factory Method Pattern
+//	(DTO 필드변수 자료형의 정보은닉을 위한 목적)
 public class IncomeDTO extends GetableAttributeNamesDTO {
 	private String incomePhone;			// VARCHAR2(11)
 	private String incomeLocalDate;		// VARCHAR2(8)
@@ -72,7 +74,7 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 							String _incomeAmount,
 							String _incomeMemo) {
 		int index = Integer.parseInt(_incomeIndex);
-		Money amount = Money.wons(Integer.parseInt(_incomeAmount));
+		Money amount = Money.wons(_incomeAmount);
 		
 		return (_incomePhone.length() <= INCOME_PHONE_MAX_LENGTH)
 					&& (_incomeLocalDate.length() <= INCOME_LOCAL_DATE_MAX_LENGTH)
@@ -93,12 +95,12 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 	@Override
 	public List<String> getAttributeNames() {
 		List<String> names = new ArrayList<String>();
-		names.add(incomePhone);
-		names.add(incomeLocalDate);
-		names.add(String.valueOf(incomeIndex));
-		names.add(incomeName);
-		names.add(incomeAmount.toString());
-		names.add(incomeMemo);
+		names.add(INCOME_PHONE_NAME);
+		names.add(INCOME_LOCAL_DATE_NAME);
+		names.add(INCOME_INDEX_NAME);
+		names.add(INCOME_NAME_NAME);
+		names.add(INCOME_AMOUNT_NAME);
+		names.add(INCOME_MEMO_NAME);
 		
 		return names;
 	}
@@ -108,13 +110,19 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 	@Override
 	public List<String> getAttributeValues() {
 		List<String> values = new ArrayList<String>();
-		
+		values.add(incomePhone);
+		values.add(incomeLocalDate);
+		values.add(String.valueOf(incomeIndex));
+		values.add(incomeName);
+		values.add(incomeAmount.toString());
+		values.add(incomeMemo);
 		
 		return values;
 	}
 	
 	
-// getter Map ( Map<String, String> ) ***변경하고 싶은 모델
+// getter Map ( Map<String, String> ) *** List 보다 Map으로 반환이 좋은 듯..
+	@Override
 	public Map<String, String> getAttributeMap() {
 		Map<String, String> values = new HashMap<String, String>();
 		values.put(INCOME_PHONE_NAME, incomePhone);

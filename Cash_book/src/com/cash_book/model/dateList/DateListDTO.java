@@ -48,8 +48,8 @@ public class DateListDTO extends GetableAttributeNamesDTO {
 	@Override
 	public List<String> getAttributeNames() {
 		List<String> names = new ArrayList<String>();
-		names.add("PHONE");
-		names.add("LOCAL_DATE");
+		names.add(PHONE_NAME);
+		names.add(LOCAL_DATE_NAME);
 		
 		return names;
 	}
@@ -67,6 +67,7 @@ public class DateListDTO extends GetableAttributeNamesDTO {
 	
 	
 // getter Map ( Map<String, String> )
+	@Override
 	public Map<String, String> getAttributeMap() {
 		Map<String, String> values = new HashMap<String, String>();
 		values.put(PHONE_NAME, phone);
