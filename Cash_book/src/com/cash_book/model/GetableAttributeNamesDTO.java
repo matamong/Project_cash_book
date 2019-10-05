@@ -1,6 +1,7 @@
 package com.cash_book.model;
 
 import java.util.List;
+import java.util.Map;
 
 public abstract class GetableAttributeNamesDTO {
 	private String tableName;
@@ -22,4 +23,7 @@ public abstract class GetableAttributeNamesDTO {
 	
 // getter attributeValues
 	abstract public List<String> getAttributeValues();
+	
+// getter attributeMap
+	abstract public Map<String, String> getAttributeMap();
 }
