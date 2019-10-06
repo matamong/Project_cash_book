@@ -1,15 +1,17 @@
 package com.cash_book.model.outcome;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.cash_book.model.CashBookType;
 import com.cash_book.model.GetableAttributeNamesDTO;
 import com.cash_book.model.Money;
+import com.cash_book.model.dbConnection.DBConnection;
 
-//Static Factory Method Pattern
-//	(DTO 필드변수 자료형의 정보은닉을 위한 목적)
 public class OutcomeDTO extends GetableAttributeNamesDTO {
 	private String outcomePhone;
 	private String outcomeLocalDate;
@@ -25,13 +27,6 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 	private static final String OUTCOME_AMOUNT_NAME;
 	private static final String OUTCOME_MEMO_NAME;
 	
-	private static final int OUTCOME_PHONE_MAX_LENGTH;
-	private static final int OUTCOME_LOCAL_DATE_MAX_LENGTH;
-	private static final int OUTCOME_INDEX_MAX_LENGTH;
-	private static final int OUTCOME_NAME_MAX_LENGTH;
-	private static final int OUTCOME_AMOUNT_MAX_LENGTH;
-	private static final int OUTCOME_MEMO_MAX_LENGTH;
-	
 	static {
 		OUTCOME_PHONE_NAME = "OUTCOME_PHONE";
 		OUTCOME_LOCAL_DATE_NAME = "OUTCOME_LOCAL_DATE";
@@ -39,18 +34,11 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 		OUTCOME_NAME_NAME = "OUTCOME_NAME";
 		OUTCOME_AMOUNT_NAME = "OUTCOME_AMOUNT";
 		OUTCOME_MEMO_NAME = "OUTCOME_MEMO";
-		
-		OUTCOME_PHONE_MAX_LENGTH = 11;
-		OUTCOME_LOCAL_DATE_MAX_LENGTH = 8;
-		OUTCOME_INDEX_MAX_LENGTH = 4;
-		OUTCOME_NAME_MAX_LENGTH = 50;
-		OUTCOME_AMOUNT_MAX_LENGTH = 11;
-		OUTCOME_MEMO_MAX_LENGTH = 100;
 	}
 	
 	
 // 생성자 
-	private OutcomeDTO(String _outcomePhone,
+	public OutcomeDTO(String _outcomePhone,
 					   String _outcomeLocalDate,
 					   int _outcomeIndex,
 					   String _outcomeName,
@@ -66,31 +54,34 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 	}
 	
 	
-// Instance Factory
-	public OutcomeDTO create(String _outcomePhone,
-							 String _outcomeLocalDate,
-							 String _outcomeIndex,
-							 String _outcomeName,
-							 String _outcomeAmount,
-							 String _outcomeMemo) 
-					  throws ClassCastException {
-		
-		return (_outcomePhone.length() <= OUTCOME_PHONE_MAX_LENGTH)
-					&& (_outcomeLocalDate.length() <= OUTCOME_LOCAL_DATE_MAX_LENGTH)
-					&& (_outcomeIndex.length() <= OUTCOME_INDEX_MAX_LENGTH)
-					&& (_outcomeName.length() <= OUTCOME_NAME_MAX_LENGTH)
-					&& (_outcomeAmount.length() <= OUTCOME_AMOUNT_MAX_LENGTH)
-					&& (_outcomeMemo.length() <= OUTCOME_MEMO_MAX_LENGTH)
-					? new OutcomeDTO(_outcomePhone,
-									 _outcomeLocalDate,
-									 Integer.parseInt(_outcomeIndex),
-									 _outcomeName,
-									 Money.wons(_outcomeAmount),
-									 _outcomeMemo) : null;
+// getter
+	public String getOutcomePhone() {
+		return outcomePhone;
+	}
+	
+	public String getOutcomeLocalDate() {
+		return outcomeLocalDate;
+	}
+	
+	public int getOutcomeIndex() {
+		return outcomeIndex;
+	}
+	
+	public String getOutcomeName() {
+		return outcomeName;
+	}
+	
+	public Money getOutcomeAmount() {
+		return outcomeAmount;
+	}
+	
+	public String getOutcomeMemo() {
+		return outcomeMemo;
 	}
 	
 	
-// getter Names ( List<String> )
+	
+// getter names
 	@Override
 	public List<String> getAttributeNames() {
 		List<String> names = new ArrayList<String>();
@@ -105,32 +96,66 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 	}
 	
 	
-// getter Values ( List<String> )
+// getter values
 	@Override
-	public List<String> getAttributeValues() {
-		List<String> values = new ArrayList<String>();
-		values.add(outcomePhone);
-		values.add(outcomeLocalDate);
-		values.add(String.valueOf(outcomeIndex));
-		values.add(outcomeName);
-		values.add(outcomeAmount.toString());
-		values.add(outcomeMemo);
+	public Map<String, String> getAttributeValues() {
+		Map<String, String> values = new HashMap<String, String>();
+		values.put(OUTCOME_PHONE_NAME, getOutcomePhone());
+		values.put(OUTCOME_LOCAL_DATE_NAME, getOutcomeLocalDate());
+		values.put(OUTCOME_INDEX_NAME, String.valueOf(getOutcomeIndex()));
+		values.put(OUTCOME_NAME_NAME, getOutcomeName());
+		values.put(OUTCOME_AMOUNT_NAME, getOutcomeAmount().toString());
+		values.put(OUTCOME_MEMO_NAME, getOutcomeMemo());
 		
 		return values;
 	}
 	
 	
-// getter Map ( Map<String, String> )
+// getter types
 	@Override
-	public Map<String, String> getAttributeMap() {
-		Map<String, String> values = new HashMap<String, String>();
-		values.put(OUTCOME_PHONE_NAME, outcomePhone);
-		values.put(OUTCOME_LOCAL_DATE_NAME, outcomeLocalDate);
-		values.put(OUTCOME_INDEX_NAME, String.valueOf(outcomeIndex));
-		values.put(OUTCOME_NAME_NAME, outcomeName);
-		values.put(OUTCOME_AMOUNT_NAME, outcomeAmount.toString());
-		values.put(OUTCOME_MEMO_NAME, outcomeMemo);
+	public Map<String, CashBookType> getAttributeTypes() {
+		Map<String, CashBookType> types = new HashMap<String, CashBookType>();
+		types.put(OUTCOME_PHONE_NAME, CashBookType.VARCHAR2);
+		types.put(OUTCOME_LOCAL_DATE_NAME, CashBookType.VARCHAR2);
+		types.put(OUTCOME_INDEX_NAME, CashBookType.NUMBER);
+		types.put(OUTCOME_NAME_NAME, CashBookType.VARCHAR2);
+		types.put(OUTCOME_AMOUNT_NAME, CashBookType.NUMBER);
+		types.put(OUTCOME_MEMO_NAME, CashBookType.VARCHAR2);
 		
-		return values;
+		return types;
+	}
+	
+	
+// getter result
+	public List<GetableAttributeNamesDTO> getResult(ResultSet _resultSet) {
+		List<GetableAttributeNamesDTO> result = new ArrayList<GetableAttributeNamesDTO>();
+		
+		try {
+			while(_resultSet.next()) {
+				String currentPhone = _resultSet.getString(OUTCOME_PHONE_NAME);
+				String currentLocalDate = _resultSet.getString(OUTCOME_LOCAL_DATE_NAME);
+				int currentIndex = _resultSet.getInt(OUTCOME_INDEX_NAME);
+				String currentName = _resultSet.getString(OUTCOME_NAME_NAME);
+				Money currentAmount = Money.wons(_resultSet.getInt(OUTCOME_AMOUNT_NAME));
+				String currentMemo = _resultSet.getString(OUTCOME_MEMO_NAME);
+				
+				GetableAttributeNamesDTO currentDTO = 
+								new OutcomeDTO(currentPhone, 
+											   currentLocalDate, 
+											   currentIndex, 
+											   currentName, 
+											   currentAmount, 
+											   currentMemo);
+				result.add(currentDTO);
+			}
+			
+		} catch(SQLException e) {
+			System.out.println("OutcomeDTO getResult Err] " + e.getMessage());
+			
+		} finally {
+			DBConnection.close(_resultSet);
+		}
+		
+		return result;
 	}
 }
