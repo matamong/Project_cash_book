@@ -20,12 +20,12 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 	private Money incomeAmount;			// NUMBER(11)
 	private String incomeMemo;			// VARCHAR2(100)
 	
-	private static final String INCOME_PHONE_NAME;
-	private static final String INCOME_LOCAL_DATE_NAME;
-	private static final String INCOME_INDEX_NAME;
-	private static final String INCOME_NAME_NAME;
-	private static final String INCOME_AMOUNT_NAME;
-	private static final String INCOME_MEMO_NAME;
+	public static final String INCOME_PHONE_NAME;
+	public static final String INCOME_LOCAL_DATE_NAME;
+	public static final String INCOME_INDEX_NAME;
+	public static final String INCOME_NAME_NAME;
+	public static final String INCOME_AMOUNT_NAME;
+	public static final String INCOME_MEMO_NAME;
 	
 	static {
 		INCOME_PHONE_NAME = "INCOME_PHONE";
@@ -92,6 +92,21 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 		names.add(INCOME_MEMO_NAME);
 		
 		return names;
+	}
+	
+	
+// getter values for List<String>
+	@Override
+	public List<String> getValues() {
+		List<String> values = new ArrayList<String>();
+		values.add(getIncomePhone());
+		values.add(getIncomeLocalDate());
+		values.add(String.valueOf(getIncomeIndex()));
+		values.add(getIncomeName());
+		values.add(getIncomeAmount().toString());
+		values.add(getIncomeMemo());
+		
+		return values;
 	}
 	
 	

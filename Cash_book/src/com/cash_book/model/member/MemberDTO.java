@@ -16,9 +16,9 @@ public class MemberDTO extends GetableAttributeNamesDTO {
 	private String name;		// VARCHAR2(10)
 	private String pw;			// VARCHAR2(15)
 	
-	private static final String PHONE_NAME;
-	private static final String NAME_NAME;
-	private static final String PW_NAME;
+	public static final String PHONE_NAME;
+	public static final String NAME_NAME;
+	public static final String PW_NAME;
 	
 	static {
 		PHONE_NAME = "PHONE";
@@ -47,6 +47,18 @@ public class MemberDTO extends GetableAttributeNamesDTO {
 	
 	public String getPw() {
 		return pw;
+	}
+	
+	
+// getter values for List<String>
+	@Override
+	public List<String> getValues() {
+		List<String> values = new ArrayList<String>();
+		values.add(getPhone());
+		values.add(getName());
+		values.add(getPw());
+		
+		return values;
 	}
 	
 

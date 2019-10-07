@@ -1,5 +1,6 @@
 package com.cash_book.model;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,8 +16,8 @@ public class CashBookDAO extends AbstractDAO {
 	
 	
 // 생성자
-	public CashBookDAO(/*Connection connection*/) {
-//		super(connection);
+	public CashBookDAO(Connection connection) {
+		super(connection);
 	}
 	
 	
@@ -72,6 +73,7 @@ public class CashBookDAO extends AbstractDAO {
 					
 				case NUMBER:
 					sql = sql.concat(" AND " + currentKey + " = " + currentValue);
+					break;
 				}
 			}
 		}
@@ -152,7 +154,7 @@ public class CashBookDAO extends AbstractDAO {
 		sql = sql.concat(")");
 		
 		return sql;
-	}	
+	}
 	
 	
 // DELETE

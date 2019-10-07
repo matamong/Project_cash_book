@@ -15,8 +15,8 @@ public class DateListDTO extends GetableAttributeNamesDTO {
 	private String phone;			// VARCHAR2(11)
 	private String localDate;		// VARCHAR2(8)
 	
-	private static final String PHONE_NAME;
-	private static final String LOCAL_DATE_NAME;
+	public static final String PHONE_NAME;
+	public static final String LOCAL_DATE_NAME;
 	
 	static {
 		PHONE_NAME = "PHONE";
@@ -39,6 +39,17 @@ public class DateListDTO extends GetableAttributeNamesDTO {
 	
 	public String getLocalDate() {
 		return localDate;
+	}
+	
+	
+// getter values
+	@Override
+	public List<String> getValues() {
+		List<String> values = new ArrayList<String>();
+		values.add(getPhone());
+		values.add(getLocalDate());
+		
+		return values;
 	}
 	
 	

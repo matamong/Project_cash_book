@@ -13,19 +13,19 @@ import com.cash_book.model.Money;
 import com.cash_book.model.dbConnection.DBConnection;
 
 public class OutcomeDTO extends GetableAttributeNamesDTO {
-	private String outcomePhone;
-	private String outcomeLocalDate;
-	private int outcomeIndex;
-	private String outcomeName;
-	private Money outcomeAmount;
-	private String outcomeMemo;
+	private String outcomePhone;			// VARCHAR2(11)
+	private String outcomeLocalDate;		// VARCHAR2(8)
+	private int outcomeIndex;				// NUMBER(4)
+	private String outcomeName;				// VARCHAR2(50)
+	private Money outcomeAmount;			// NUMBER(11)
+	private String outcomeMemo;				// VARCHAR2(100)
 	
-	private static final String OUTCOME_PHONE_NAME;
-	private static final String OUTCOME_LOCAL_DATE_NAME;
-	private static final String OUTCOME_INDEX_NAME;
-	private static final String OUTCOME_NAME_NAME;
-	private static final String OUTCOME_AMOUNT_NAME;
-	private static final String OUTCOME_MEMO_NAME;
+	public static final String OUTCOME_PHONE_NAME;
+	public static final String OUTCOME_LOCAL_DATE_NAME;
+	public static final String OUTCOME_INDEX_NAME;
+	public static final String OUTCOME_NAME_NAME;
+	public static final String OUTCOME_AMOUNT_NAME;
+	public static final String OUTCOME_MEMO_NAME;
 	
 	static {
 		OUTCOME_PHONE_NAME = "OUTCOME_PHONE";
@@ -79,6 +79,19 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 		return outcomeMemo;
 	}
 	
+	
+// getter values for List<String>
+	public List<String> getValues() {
+		List<String> values = new ArrayList<String>();
+		values.add(getOutcomePhone());
+		values.add(getOutcomeLocalDate());
+		values.add(String.valueOf(getOutcomeIndex()));
+		values.add(getOutcomeName());
+		values.add(getOutcomeAmount().toString());
+		values.add(getOutcomeMemo());
+		
+		return values;
+	}
 	
 	
 // getter names
