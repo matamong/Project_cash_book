@@ -1,9 +1,10 @@
 package com.cash_book.controllers;
 
 import com.cash_book.controllers.action.Action;
-import com.cash_book.controllers.action.IndexAction;
+import com.cash_book.controllers.action.MainAction;
 import com.cash_book.controllers.action.LoginAction;
 import com.cash_book.controllers.action.LoginFormAction;
+import com.cash_book.controllers.action.LogoutAction;
 
 public class CashBookActionFactory {
 	private CashBookActionFactory() {}
@@ -15,13 +16,16 @@ public class CashBookActionFactory {
 	public Action getAction(String command) {
 		Action action = null;
 		System.out.println("ActionFactory : "+ command);
-		if(command.equals("index")) {
-			action = new IndexAction();
+		if(command.equals("main")) {
+			action = new MainAction();
 		}if(command.equals("login_form")) {
 			action = new LoginFormAction();
 		}if(command.equals("login")) {
 			action = new LoginAction();
+		}if(command.equals("logout")) {
+			action = new LogoutAction();
 		}
+		
 		return action;
 	}
 

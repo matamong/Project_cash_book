@@ -33,9 +33,5 @@ public class CashBookServlet extends HttpServlet {
 		if(action != null) {
 			action.execute(request, response);
 		}
-		
-		
-
 	}
-
 }

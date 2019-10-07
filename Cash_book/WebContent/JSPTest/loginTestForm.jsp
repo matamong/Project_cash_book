@@ -15,8 +15,8 @@
 	<form method="post" action="CashBook?command=login">
 	<fieldset>
 		<legend></legend>
+		<label>Phone Number</label><input name="phone" type="text"><br>
 		<label>Password</label><input name="pw" type="password"><br>
-		<label>Phone Number</label><input name="phone" type="text" value=""><br>
 	</fieldset>
 	<div class="clear"></div>
 	<div id="buttons">
