@@ -1,6 +1,8 @@
 package com.cash_book.controllers;
 
 import com.cash_book.controllers.action.Action;
+import com.cash_book.controllers.action.JoinAction;
+import com.cash_book.controllers.action.JoinFormAction;
 import com.cash_book.controllers.action.MainAction;
 import com.cash_book.controllers.action.LoginAction;
 import com.cash_book.controllers.action.LoginFormAction;
@@ -24,6 +26,10 @@ public class CashBookActionFactory {
 			action = new LoginAction();
 		}if(command.equals("logout")) {
 			action = new LogoutAction();
+		}if(command.equals("join_form")) {
+			action = new JoinFormAction();
+		}if(command.equals("join")) {
+			action = new JoinAction();
 		}
 		
 		return action;
