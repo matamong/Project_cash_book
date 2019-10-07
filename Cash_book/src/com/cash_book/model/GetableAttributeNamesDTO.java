@@ -1,5 +1,6 @@
 package com.cash_book.model;
 
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +19,16 @@ public abstract class GetableAttributeNamesDTO {
 		return tableName;
 	}
 	
+	
 // getter attributeNames
 	abstract public List<String> getAttributeNames();
 	
 // getter attributeValues
-	abstract public List<String> getAttributeValues();
+	abstract public Map<String, String> getAttributeValues();
 	
-// getter attributeMap
-	abstract public Map<String, String> getAttributeMap();
+// getter attributeTypeMap
+	abstract public Map<String, CashBookType> getAttributeTypes();
+	
+// getter result
+	abstract public List<GetableAttributeNamesDTO> getResult(ResultSet resultSet);
 }
