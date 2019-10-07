@@ -54,41 +54,15 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 	}
 	
 	
-// getter
-	public String getOutcomePhone() {
-		return outcomePhone;
-	}
-	
-	public String getOutcomeLocalDate() {
-		return outcomeLocalDate;
-	}
-	
-	public int getOutcomeIndex() {
-		return outcomeIndex;
-	}
-	
-	public String getOutcomeName() {
-		return outcomeName;
-	}
-	
-	public Money getOutcomeAmount() {
-		return outcomeAmount;
-	}
-	
-	public String getOutcomeMemo() {
-		return outcomeMemo;
-	}
-	
-	
 // getter values for List<String>
 	public List<String> getValues() {
 		List<String> values = new ArrayList<String>();
-		values.add(getOutcomePhone());
-		values.add(getOutcomeLocalDate());
-		values.add(String.valueOf(getOutcomeIndex()));
-		values.add(getOutcomeName());
-		values.add(getOutcomeAmount().toString());
-		values.add(getOutcomeMemo());
+		values.add(outcomePhone);
+		values.add(outcomeLocalDate);
+		values.add(String.valueOf(outcomeIndex));
+		values.add(outcomeName);
+		values.add(outcomeAmount.toString());
+		values.add(outcomeMemo);
 		
 		return values;
 	}
@@ -113,12 +87,12 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 	@Override
 	public Map<String, String> getAttributeValues() {
 		Map<String, String> values = new HashMap<String, String>();
-		values.put(OUTCOME_PHONE_NAME, getOutcomePhone());
-		values.put(OUTCOME_LOCAL_DATE_NAME, getOutcomeLocalDate());
-		values.put(OUTCOME_INDEX_NAME, String.valueOf(getOutcomeIndex()));
-		values.put(OUTCOME_NAME_NAME, getOutcomeName());
-		values.put(OUTCOME_AMOUNT_NAME, getOutcomeAmount().toString());
-		values.put(OUTCOME_MEMO_NAME, getOutcomeMemo());
+		values.put(OUTCOME_PHONE_NAME, outcomePhone);
+		values.put(OUTCOME_LOCAL_DATE_NAME, outcomeLocalDate);
+		values.put(OUTCOME_INDEX_NAME, String.valueOf(outcomeIndex));
+		values.put(OUTCOME_NAME_NAME, outcomeName);
+		values.put(OUTCOME_AMOUNT_NAME, outcomeAmount.toString());
+		values.put(OUTCOME_MEMO_NAME, outcomeMemo);
 		
 		return values;
 	}

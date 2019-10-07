@@ -36,27 +36,13 @@ public class MemberDTO extends GetableAttributeNamesDTO {
 	}
 	
 	
-// getter each attribute
-	public String getPhone() {
-		return phone;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public String getPw() {
-		return pw;
-	}
-	
-	
 // getter values for List<String>
 	@Override
 	public List<String> getValues() {
 		List<String> values = new ArrayList<String>();
-		values.add(getPhone());
-		values.add(getName());
-		values.add(getPw());
+		values.add(phone);
+		values.add(name);
+		values.add(pw);
 		
 		return values;
 	}
