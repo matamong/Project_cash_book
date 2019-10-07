@@ -9,7 +9,7 @@
 <body>
 </body>
 <script>
-	alert("로그인실패");
+	alert("성공하지 못 하였습니다~");
 	history.go(-1);
 </script>
 </html>

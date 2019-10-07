@@ -16,8 +16,7 @@ import com.cash_book.model.member.MemberDTO;
 public class JoinAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "JSPTest/joinFailed.jsp";  
-		//회원가입하고 메인으로 갈지, 로그인화면으로 갈지, 회원가입완료 창으로 갈지(자바스크립, 온클릭으로 확인하면 main으로)...
+		String url = "JSPTest/failed.jsp";  
 		
 		String phone = request.getParameter("phone");
 		String pw = request.getParameter("pw");
@@ -37,7 +36,7 @@ public class JoinAction implements Action {
 			boolean result = dao.insert(insertedMemberDTO);
 			System.out.println("dao.insert 결과 : " + result);
 			if(result != false)
-				url = "JSPTest/indexTest.jsp";  //insert가 되면 완료 뜨고 login으로 이동할 수 있게..
+				url = "JSPTest/success.jsp";
 		}else {
 			System.out.println("이미 DB에 존재하는 phone 입니다. phone : " + phone);
 		}

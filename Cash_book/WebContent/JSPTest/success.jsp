@@ -9,7 +9,7 @@
 <body>
 </body>
 <script>
-	alert("회원가입실패");
+	alert("성공했습니다~");
 	history.go(-1);
 </script>
 </html>

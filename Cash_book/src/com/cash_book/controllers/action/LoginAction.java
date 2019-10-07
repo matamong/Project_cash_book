@@ -18,15 +18,13 @@ import com.cash_book.model.member.MemberDTO;
 public class LoginAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/JSPTest/loginFailed.jsp";
+		String url = "/JSPTest/failed.jsp";
 		CashBookDAO dao = new CashBookDAO(DBConnection.getConnection());
-
 		HttpSession session = request.getSession();
 
 		String phone = request.getParameter("phone");//phone
 		String pw = request.getParameter("pw");//pw
 		
-
 		GetableAttributeNamesDTO memberDTO = new MemberDTO(phone, null, null); //name만 받을 때.
 		List<GetableAttributeNamesDTO> resultSelect = dao.select(memberDTO);
 		
@@ -42,7 +40,6 @@ public class LoginAction implements Action {
 			Map<String, String> selectMap = resultSelect.get(0).getAttributeValues();
 			String selectedPW  = selectMap.get(MemberDTO.PW_NAME);
 			
-			// pw == selectedPW 임...resultSelect가 계속 비어서와서 임시 테스트용으로 "aa"로 테스트즁
 			if(pw.equals(selectedPW)) {
 				session.removeAttribute("name");
 				session.setAttribute("phone", selectMap.get(MemberDTO.PHONE_NAME));
