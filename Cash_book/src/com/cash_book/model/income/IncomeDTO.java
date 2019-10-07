@@ -1,15 +1,17 @@
 package com.cash_book.model.income;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.cash_book.model.CashBookType;
 import com.cash_book.model.GetableAttributeNamesDTO;
 import com.cash_book.model.Money;
+import com.cash_book.model.dbConnection.DBConnection;
 
-//Static Factory Method Pattern
-//	(DTO 필드변수 자료형의 정보은닉을 위한 목적)
 public class IncomeDTO extends GetableAttributeNamesDTO {
 	private String incomePhone;			// VARCHAR2(11)
 	private String incomeLocalDate;		// VARCHAR2(8)
@@ -25,13 +27,6 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 	private static final String INCOME_AMOUNT_NAME;
 	private static final String INCOME_MEMO_NAME;
 	
-	private static final int INCOME_PHONE_MAX_LENGTH;
-	private static final int INCOME_LOCAL_DATE_MAX_LENGTH;
-	private static final int INCOME_INDEX_MAX_LENGTH;
-	private static final int INCOME_NAME_MAX_LENGTH;
-	private static final int INCOME_AMOUNT_MAX_LENGTH;
-	private static final int INCOME_MEMO_MAX_LENGTH;
-	
 	static {
 		INCOME_PHONE_NAME = "INCOME_PHONE";
 		INCOME_LOCAL_DATE_NAME = "INCOME_LOCAL_DATE";
@@ -39,18 +34,11 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 		INCOME_NAME_NAME = "INCOME_NAME";
 		INCOME_AMOUNT_NAME = "INCOME_AMOUNT";
 		INCOME_MEMO_NAME = "INCOME_MEMO";
-		
-		INCOME_PHONE_MAX_LENGTH = 11;
-		INCOME_LOCAL_DATE_MAX_LENGTH = 8;
-		INCOME_INDEX_MAX_LENGTH = 4;
-		INCOME_NAME_MAX_LENGTH = 50;
-		INCOME_AMOUNT_MAX_LENGTH = 11;
-		INCOME_MEMO_MAX_LENGTH = 100;
 	}
 	
 	
 // 생성자
-	private IncomeDTO(String _incomePhone,
+	public IncomeDTO(String _incomePhone,
 					  String _incomeLocalDate,
 					  int _incomeIndex,
 					  String _incomeName,
@@ -66,31 +54,33 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 	}
 	
 	
-// Instance Factory
-	public IncomeDTO create(String _incomePhone,
-							String _incomeLocalDate,
-							String _incomeIndex,
-							String _incomeName,
-							String _incomeAmount,
-							String _incomeMemo) 
-					 throws ClassCastException {
-		
-		return (_incomePhone.length() <= INCOME_PHONE_MAX_LENGTH)
-					&& (_incomeLocalDate.length() <= INCOME_LOCAL_DATE_MAX_LENGTH)
-					&& (_incomeIndex.length() <= INCOME_INDEX_MAX_LENGTH)
-					&& (_incomeName.length() <= INCOME_NAME_MAX_LENGTH)
-					&& (_incomeAmount.length() <= INCOME_AMOUNT_MAX_LENGTH)
-					&& (_incomeMemo.length() <= INCOME_MEMO_MAX_LENGTH)
-					? new IncomeDTO(_incomePhone,
-									_incomeLocalDate,
-									Integer.parseInt(_incomeIndex),
-									_incomeName,
-									Money.wons(_incomeAmount),
-									_incomeMemo) : null;
+// getter each attribute
+	public String getIncomePhone() {
+		return incomePhone;
+	}
+	
+	public String getIncomeLocalDate() {
+		return incomeLocalDate;
+	}
+	
+	public int getIncomeIndex() {
+		return incomeIndex;
+	}
+	
+	public String getIncomeName() {
+		return incomeName;
+	}
+	
+	public Money getIncomeAmount() {
+		return incomeAmount;
+	}
+	
+	public String getIncomeMemo() {
+		return incomeMemo;
 	}
 	
 	
-// getter Names ( List<String> )
+// getter Names
 	@Override
 	public List<String> getAttributeNames() {
 		List<String> names = new ArrayList<String>();
@@ -105,32 +95,67 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 	}
 	
 	
-// getter values  ( List<String> )
+// getter values
 	@Override
-	public List<String> getAttributeValues() {
-		List<String> values = new ArrayList<String>();
-		values.add(incomePhone);
-		values.add(incomeLocalDate);
-		values.add(String.valueOf(incomeIndex));
-		values.add(incomeName);
-		values.add(incomeAmount.toString());
-		values.add(incomeMemo);
+	public Map<String, String> getAttributeValues() {
+		Map<String, String> values = new HashMap<String, String>();
+		values.put(INCOME_PHONE_NAME, getIncomePhone());
+		values.put(INCOME_LOCAL_DATE_NAME, getIncomeLocalDate());
+		values.put(INCOME_INDEX_NAME, String.valueOf(getIncomeIndex()));
+		values.put(INCOME_NAME_NAME, getIncomeName());
+		values.put(INCOME_AMOUNT_NAME, getIncomeAmount().toString());
+		values.put(INCOME_MEMO_NAME, getIncomeMemo());		
 		
 		return values;
 	}
 	
 	
-// getter Map ( Map<String, String> ) *** List 보다 Map으로 반환이 좋은 듯..
+// getter types
 	@Override
-	public Map<String, String> getAttributeMap() {
-		Map<String, String> values = new HashMap<String, String>();
-		values.put(INCOME_PHONE_NAME, incomePhone);
-		values.put(INCOME_LOCAL_DATE_NAME, incomeLocalDate);
-		values.put(INCOME_INDEX_NAME, String.valueOf(incomeIndex));
-		values.put(INCOME_NAME_NAME, incomeName);
-		values.put(INCOME_AMOUNT_NAME, incomeAmount.toString());
-		values.put(INCOME_MEMO_NAME, incomeMemo);
+	public Map<String, CashBookType> getAttributeTypes() {
+		Map<String, CashBookType> types = new HashMap<String, CashBookType>();
+		types.put(INCOME_PHONE_NAME, CashBookType.VARCHAR2);
+		types.put(INCOME_LOCAL_DATE_NAME, CashBookType.VARCHAR2);
+		types.put(INCOME_INDEX_NAME, CashBookType.NUMBER);
+		types.put(INCOME_NAME_NAME, CashBookType.VARCHAR2);
+		types.put(INCOME_AMOUNT_NAME, CashBookType.NUMBER);
+		types.put(INCOME_MEMO_NAME, CashBookType.VARCHAR2);
 		
-		return values;
+		return types;
+	}
+	
+	
+// getter result
+	@Override
+	public List<GetableAttributeNamesDTO> getResult(ResultSet _resultSet) {
+		List<GetableAttributeNamesDTO> result = new ArrayList<GetableAttributeNamesDTO>();
+		
+		try {
+			while(_resultSet.next()) {
+				String currentPhone = _resultSet.getString(INCOME_PHONE_NAME);
+				String currentLocalDate = _resultSet.getString(INCOME_LOCAL_DATE_NAME);
+				int currentIndex = _resultSet.getInt(INCOME_INDEX_NAME);
+				String currentName = _resultSet.getString(INCOME_NAME_NAME);
+				Money currentAmount = Money.wons(_resultSet.getString(INCOME_AMOUNT_NAME));
+				String currentMemo = _resultSet.getString(INCOME_MEMO_NAME);
+				
+				GetableAttributeNamesDTO currentDTO = 
+								new IncomeDTO(currentPhone, 
+											  currentLocalDate, 
+											  currentIndex, 
+											  currentName, 
+											  currentAmount, 
+											  currentMemo);
+				result.add(currentDTO);
+			}
+			
+		} catch(SQLException e) {
+			System.out.println("IncomeDTO getResult Err] " + e.getMessage());
+			
+		} finally {
+			DBConnection.close(_resultSet);
+		}
+		
+		return result;
 	}
 }
