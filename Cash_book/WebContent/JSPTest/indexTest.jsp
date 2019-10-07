@@ -5,9 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>indexTest</title>
-	<h1>컨트롤러와 JSP가 연결되는지 테스트하는 페이지입니다.</h1>
-	주소: /CahsBook?command=index <br>
-	JSP경로: WebContent/JSPTest/indexTest.jsp
+	<h1>컨트롤러와 main JSP가 연결되는지 테스트하는 페이지입니다.</h1>
+
 </head>
 <body>
 

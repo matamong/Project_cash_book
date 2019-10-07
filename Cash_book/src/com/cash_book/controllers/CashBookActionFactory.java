@@ -14,7 +14,7 @@ public class CashBookActionFactory {
 	
 	public Action getAction(String command) {
 		Action action = null;
-		System.out.println("ActionFactory : "+command);
+		System.out.println("ActionFactory : "+ command);
 		if(command.equals("index")) {
 			action = new IndexAction();
 		}if(command.equals("login_form")) {

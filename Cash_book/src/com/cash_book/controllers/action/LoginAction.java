@@ -22,13 +22,12 @@ public class LoginAction implements Action {
 
 		HttpSession session = request.getSession();
 
-		String name = request.getParameter("");//name
 		String pw = request.getParameter("");//pw
 		String phone = request.getParameter("");//phone
 
 		CashBookDAO dao = new CashBookDAO(DBConnection.getConnection());
 
-		GetableAttributeNamesDTO memberDTO = new MemberDTO(phone, name, pw); //name만 받을 때.
+		GetableAttributeNamesDTO memberDTO = new MemberDTO(phone, "", pw); //name만 받을 때.
 
 
 		List<GetableAttributeNamesDTO> resultSelect = dao.select(memberDTO);
