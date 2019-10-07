@@ -19,6 +19,8 @@ public abstract class GetableAttributeNamesDTO {
 		return tableName;
 	}
 	
+// getter getValues for List<String>
+	abstract public List<String> getValues();
 	
 // getter attributeNames
 	abstract public List<String> getAttributeNames();

@@ -72,7 +72,7 @@ INSERT INTO MEMBER(NAME,
 INSERT INTO DATE_LIST(PHONE, 
                       LOCAL_DATE)
                VALUES('01095513439',
-                      TO_DATE('2019-10-05', 'YYYY-MM-DD')
+                      '20191005'
 );
      
 INSERT INTO INCOME(INCOME_PHONE, 
@@ -82,7 +82,7 @@ INSERT INTO INCOME(INCOME_PHONE,
                    INCOME_AMOUNT, 
                    INCOME_MEMO)
             VALUES('01095513439',
-                   TO_DATE('2019-10-05', 'YYYY-MM-DD'),                     
+                   '20191005',
                    1, 
                    '월급', 
                    6000, 
@@ -96,7 +96,7 @@ INSERT INTO OUTCOME(OUTCOME_PHONE,
                     OUTCOME_AMOUNT,
                     OUTCOME_MEMO)
              VALUES('01095513439',
-                    TO_DATE('2019-10-05', 'YYYY-MM-DD'),
+                    '20191005',
                     1,
                     '간식',
                     50000,
@@ -113,17 +113,17 @@ SELECT * FROM OUTCOME;
 -- TEST - DELETE
 DELETE FROM INCOME 
       WHERE INCOME_PHONE = '01095513439'
-        AND INCOME_LOCAL_DATE = TO_DATE('2019-10-05', 'YYYY-MM-DD')
+        AND INCOME_LOCAL_DATE = '20191005'
         AND INCOME_INDEX = 1;
         
 DELETE FROM OUTCOME
       WHERE OUTCOME_PHONE = '01095513439'
-        AND OUTCOME_LOCAL_DATE = TO_DATE('2019-10-05', 'YYYY-MM-DD')
+        AND OUTCOME_LOCAL_DATE = '20191005'
         AND OUTCOME_INDEX = 1;
         
 DELETE FROM DATE_LIST
       WHERE PHONE = '01095513439'
-        AND LOCAL_DATE = TO_DATE('2019-10-05', 'YYYY-MM-DD');
+        AND LOCAL_DATE = '20191005';
         
 DELETE FROM MEMBER
       WHERE PHONE = '01095513439';

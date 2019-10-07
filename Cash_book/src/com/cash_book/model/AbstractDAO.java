@@ -2,15 +2,14 @@ package com.cash_book.model;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.Map;
 
 public abstract class AbstractDAO {
 	private Connection connection;
 	
 	
 // 생성자
-	public AbstractDAO(/*Connection connection*/) {
-//		this.connection = connection;
+	public AbstractDAO(Connection connection) {
+		this.connection = connection;
 	}
 	
 	

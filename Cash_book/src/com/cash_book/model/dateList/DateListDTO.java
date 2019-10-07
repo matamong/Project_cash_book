@@ -15,8 +15,8 @@ public class DateListDTO extends GetableAttributeNamesDTO {
 	private String phone;			// VARCHAR2(11)
 	private String localDate;		// VARCHAR2(8)
 	
-	private static final String PHONE_NAME;
-	private static final String LOCAL_DATE_NAME;
+	public static final String PHONE_NAME;
+	public static final String LOCAL_DATE_NAME;
 	
 	static {
 		PHONE_NAME = "PHONE";
@@ -30,15 +30,16 @@ public class DateListDTO extends GetableAttributeNamesDTO {
 		this.phone = _phone;
 		this.localDate = _localDate;
 	}
+
 	
-	
-// getter each attribute
-	public String getPhone() {
-		return phone;
-	}
-	
-	public String getLocalDate() {
-		return localDate;
+// getter values
+	@Override
+	public List<String> getValues() {
+		List<String> values = new ArrayList<String>();
+		values.add(phone);
+		values.add(localDate);
+		
+		return values;
 	}
 	
 	
@@ -57,8 +58,8 @@ public class DateListDTO extends GetableAttributeNamesDTO {
 	@Override
 	public Map<String, String> getAttributeValues() {
 		Map<String, String> values = new HashMap<String, String>();
-		values.put(PHONE_NAME, getPhone());
-		values.put(LOCAL_DATE_NAME, getLocalDate());
+		values.put(PHONE_NAME, phone);
+		values.put(LOCAL_DATE_NAME, localDate);
 		
 		return values;
 	}
