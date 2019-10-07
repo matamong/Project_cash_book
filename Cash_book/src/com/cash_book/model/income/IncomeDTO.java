@@ -20,12 +20,12 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 	private Money incomeAmount;			// NUMBER(11)
 	private String incomeMemo;			// VARCHAR2(100)
 	
-	private static final String INCOME_PHONE_NAME;
-	private static final String INCOME_LOCAL_DATE_NAME;
-	private static final String INCOME_INDEX_NAME;
-	private static final String INCOME_NAME_NAME;
-	private static final String INCOME_AMOUNT_NAME;
-	private static final String INCOME_MEMO_NAME;
+	public static final String INCOME_PHONE_NAME;
+	public static final String INCOME_LOCAL_DATE_NAME;
+	public static final String INCOME_INDEX_NAME;
+	public static final String INCOME_NAME_NAME;
+	public static final String INCOME_AMOUNT_NAME;
+	public static final String INCOME_MEMO_NAME;
 	
 	static {
 		INCOME_PHONE_NAME = "INCOME_PHONE";
@@ -54,32 +54,6 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 	}
 	
 	
-// getter each attribute
-	public String getIncomePhone() {
-		return incomePhone;
-	}
-	
-	public String getIncomeLocalDate() {
-		return incomeLocalDate;
-	}
-	
-	public int getIncomeIndex() {
-		return incomeIndex;
-	}
-	
-	public String getIncomeName() {
-		return incomeName;
-	}
-	
-	public Money getIncomeAmount() {
-		return incomeAmount;
-	}
-	
-	public String getIncomeMemo() {
-		return incomeMemo;
-	}
-	
-	
 // getter Names
 	@Override
 	public List<String> getAttributeNames() {
@@ -95,16 +69,31 @@ public class IncomeDTO extends GetableAttributeNamesDTO {
 	}
 	
 	
+// getter values for List<String>
+	@Override
+	public List<String> getValues() {
+		List<String> values = new ArrayList<String>();
+		values.add(incomePhone);
+		values.add(incomeLocalDate);
+		values.add(String.valueOf(incomeIndex));
+		values.add(incomeName);
+		values.add(incomeAmount.toString());
+		values.add(incomeMemo);
+		
+		return values;
+	}
+	
+	
 // getter values
 	@Override
 	public Map<String, String> getAttributeValues() {
 		Map<String, String> values = new HashMap<String, String>();
-		values.put(INCOME_PHONE_NAME, getIncomePhone());
-		values.put(INCOME_LOCAL_DATE_NAME, getIncomeLocalDate());
-		values.put(INCOME_INDEX_NAME, String.valueOf(getIncomeIndex()));
-		values.put(INCOME_NAME_NAME, getIncomeName());
-		values.put(INCOME_AMOUNT_NAME, getIncomeAmount().toString());
-		values.put(INCOME_MEMO_NAME, getIncomeMemo());		
+		values.put(INCOME_PHONE_NAME, incomePhone);
+		values.put(INCOME_LOCAL_DATE_NAME, incomeLocalDate);
+		values.put(INCOME_INDEX_NAME, String.valueOf(incomeIndex));
+		values.put(INCOME_NAME_NAME, incomeName);
+		values.put(INCOME_AMOUNT_NAME, incomeAmount.toString());
+		values.put(INCOME_MEMO_NAME, incomeMemo);		
 		
 		return values;
 	}
