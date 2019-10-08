@@ -18,6 +18,8 @@ import com.cash_book.model.member.MemberDTO;
 public class LoginAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+
 		String url = "/JSPTest/failed.jsp";
 		CashBookDAO dao = new CashBookDAO(DBConnection.getConnection());
 		HttpSession session = request.getSession();
@@ -29,11 +31,7 @@ public class LoginAction implements Action {
 		List<GetableAttributeNamesDTO> resultSelect = dao.select(memberDTO);
 		
 		if(resultSelect.isEmpty()) {
-			System.out.println();
-			System.out.println("JSP에서 LoginAction으로 넘어온 pw 속성값 : " + pw);
-			System.out.println("JSP에서 LoginAction으로 넘어온 phone 속성값 : " + phone);
-			System.out.println("dao.select 값이 없습니다..");
-			System.out.println();
+			System.out.println("resultSelect 가 비었습니다.");
 		}
 		
 		if(!resultSelect.isEmpty()) {
@@ -47,15 +45,6 @@ public class LoginAction implements Action {
 				session.setAttribute("loginUser", memberDTO);
 				url="CashBook?command=main";
 			}
-		}
-		
-		//속성값만 잘 넘어가는지 테스트용
-		if(pw.equals("aa")) {
-			session.removeAttribute("name");
-			session.setAttribute("phone", phone);
-			session.setAttribute("name", "임시이름");
-			session.setAttribute("loginUser", memberDTO);
-			url="CashBook?command=main";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);

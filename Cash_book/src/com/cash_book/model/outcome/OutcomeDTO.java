@@ -15,14 +15,12 @@ import com.cash_book.model.dbConnection.DBConnection;
 public class OutcomeDTO extends GetableAttributeNamesDTO {
 	private String outcomePhone;			// VARCHAR2(11)
 	private String outcomeLocalDate;		// VARCHAR2(8)
-	private int outcomeIndex;				// NUMBER(4)
 	private String outcomeName;				// VARCHAR2(50)
 	private Money outcomeAmount;			// NUMBER(11)
 	private String outcomeMemo;				// VARCHAR2(100)
 	
 	public static final String OUTCOME_PHONE_NAME;
 	public static final String OUTCOME_LOCAL_DATE_NAME;
-	public static final String OUTCOME_INDEX_NAME;
 	public static final String OUTCOME_NAME_NAME;
 	public static final String OUTCOME_AMOUNT_NAME;
 	public static final String OUTCOME_MEMO_NAME;
@@ -30,7 +28,6 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 	static {
 		OUTCOME_PHONE_NAME = "OUTCOME_PHONE";
 		OUTCOME_LOCAL_DATE_NAME = "OUTCOME_LOCAL_DATE";
-		OUTCOME_INDEX_NAME = "OUTCOME_INDEX";
 		OUTCOME_NAME_NAME = "OUTCOME_NAME";
 		OUTCOME_AMOUNT_NAME = "OUTCOME_AMOUNT";
 		OUTCOME_MEMO_NAME = "OUTCOME_MEMO";
@@ -40,17 +37,15 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 // 생성자 
 	public OutcomeDTO(String _outcomePhone,
 					   String _outcomeLocalDate,
-					   int _outcomeIndex,
 					   String _outcomeName,
-					   Money _outcomeAmount,
+					   String _outcomeAmount,
 					   String _outcomeMemo) {
 		super("OUTCOME");
-		this.outcomePhone = _outcomePhone;
-		this.outcomeLocalDate = _outcomeLocalDate;
-		this.outcomeIndex = _outcomeIndex;
-		this.outcomeName = _outcomeName;
-		this.outcomeAmount = _outcomeAmount;
-		this.outcomeMemo = _outcomeMemo;
+		this.outcomePhone = checkStringValue(_outcomePhone);
+		this.outcomeLocalDate = checkStringValue(_outcomeLocalDate);
+		this.outcomeName = checkStringValue(_outcomeName);
+		this.outcomeAmount = checkMoneyValue(_outcomeAmount);
+		this.outcomeMemo = checkStringValue(_outcomeMemo);
 	}
 	
 	
@@ -59,7 +54,6 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 		List<String> values = new ArrayList<String>();
 		values.add(outcomePhone);
 		values.add(outcomeLocalDate);
-		values.add(String.valueOf(outcomeIndex));
 		values.add(outcomeName);
 		values.add(outcomeAmount.toString());
 		values.add(outcomeMemo);
@@ -74,7 +68,6 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 		List<String> names = new ArrayList<String>();
 		names.add(OUTCOME_PHONE_NAME);
 		names.add(OUTCOME_LOCAL_DATE_NAME);
-		names.add(OUTCOME_INDEX_NAME);
 		names.add(OUTCOME_NAME_NAME);
 		names.add(OUTCOME_AMOUNT_NAME);
 		names.add(OUTCOME_MEMO_NAME);
@@ -89,7 +82,6 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 		Map<String, String> values = new HashMap<String, String>();
 		values.put(OUTCOME_PHONE_NAME, outcomePhone);
 		values.put(OUTCOME_LOCAL_DATE_NAME, outcomeLocalDate);
-		values.put(OUTCOME_INDEX_NAME, String.valueOf(outcomeIndex));
 		values.put(OUTCOME_NAME_NAME, outcomeName);
 		values.put(OUTCOME_AMOUNT_NAME, outcomeAmount.toString());
 		values.put(OUTCOME_MEMO_NAME, outcomeMemo);
@@ -102,12 +94,11 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 	@Override
 	public Map<String, CashBookType> getAttributeTypes() {
 		Map<String, CashBookType> types = new HashMap<String, CashBookType>();
-		types.put(OUTCOME_PHONE_NAME, CashBookType.VARCHAR2);
-		types.put(OUTCOME_LOCAL_DATE_NAME, CashBookType.VARCHAR2);
-		types.put(OUTCOME_INDEX_NAME, CashBookType.NUMBER);
-		types.put(OUTCOME_NAME_NAME, CashBookType.VARCHAR2);
-		types.put(OUTCOME_AMOUNT_NAME, CashBookType.NUMBER);
-		types.put(OUTCOME_MEMO_NAME, CashBookType.VARCHAR2);
+		types.put(OUTCOME_PHONE_NAME, CashBookType.STRING);
+		types.put(OUTCOME_LOCAL_DATE_NAME, CashBookType.STRING);
+		types.put(OUTCOME_NAME_NAME, CashBookType.STRING);
+		types.put(OUTCOME_AMOUNT_NAME, CashBookType.MONEY);
+		types.put(OUTCOME_MEMO_NAME, CashBookType.STRING);
 		
 		return types;
 	}
@@ -121,7 +112,6 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 			while(_resultSet.next()) {
 				String currentPhone = _resultSet.getString(OUTCOME_PHONE_NAME);
 				String currentLocalDate = _resultSet.getString(OUTCOME_LOCAL_DATE_NAME);
-				int currentIndex = _resultSet.getInt(OUTCOME_INDEX_NAME);
 				String currentName = _resultSet.getString(OUTCOME_NAME_NAME);
 				Money currentAmount = Money.wons(_resultSet.getInt(OUTCOME_AMOUNT_NAME));
 				String currentMemo = _resultSet.getString(OUTCOME_MEMO_NAME);
@@ -129,9 +119,8 @@ public class OutcomeDTO extends GetableAttributeNamesDTO {
 				GetableAttributeNamesDTO currentDTO = 
 								new OutcomeDTO(currentPhone, 
 											   currentLocalDate, 
-											   currentIndex, 
 											   currentName, 
-											   currentAmount, 
+											   currentAmount.toString(), 
 											   currentMemo);
 				result.add(currentDTO);
 			}

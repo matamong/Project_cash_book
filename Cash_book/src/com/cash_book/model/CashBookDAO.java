@@ -25,20 +25,19 @@ public class CashBookDAO extends AbstractDAO {
 	@Override
 	public List<GetableAttributeNamesDTO> select(GetableAttributeNamesDTO _dto) {
 		String sql = "SELECT * FROM " + _dto.getTableName();
-
+		
 		Map<String, String> values = _dto.getAttributeValues();
 		Map<String, CashBookType> types = _dto.getAttributeTypes();
 		
 		sql = sql.concat(createSQL_where(values, types));
-		
+
 		Statement statement = null;
 		ResultSet resultSet = null;
 		List<GetableAttributeNamesDTO> result = new ArrayList<GetableAttributeNamesDTO>();
 		
 		try {
 			statement = getConnection().createStatement();
-			resultSet = statement.executeQuery(sql);
-			
+			resultSet = statement.executeQuery(sql);			
 			result = _dto.getResult(resultSet);
 
 		} catch(SQLException e) {
@@ -61,22 +60,28 @@ public class CashBookDAO extends AbstractDAO {
 		Set<String> keys = _conditions.keySet();
 		Iterator<String> iterator = keys.iterator();	
 		
-		while(iterator.hasNext()) {
+		while(iterator.hasNext()) {			
 			String currentKey = iterator.next();
-			String currentValue = _conditions.get(currentKey);
+			Object currentValue = _conditions.get(currentKey);
 			
-			if(currentValue != null || currentValue != "") {
+			System.out.println("[" + currentKey + ", " + currentValue + "]");
+
+			if(currentValue == null || currentValue.equals(" ") || currentValue.equals("0")) {
+				continue;
+			
+			} else {
 				switch(_types.get(currentKey)) {
-				case VARCHAR2:
+				case STRING:
 					sql = sql.concat(" AND " + currentKey + " = '" + currentValue + "'");
 					break;
 					
-				case NUMBER:
+				case INTEGER:
+				case MONEY:
 					sql = sql.concat(" AND " + currentKey + " = " + currentValue);
 					break;
 				}
 			}
-		}
+		} System.out.println("\n");
 		
 		sql = sql.replaceFirst("AND", "WHERE");
 		return sql;
@@ -95,6 +100,8 @@ public class CashBookDAO extends AbstractDAO {
 		sql = sql.concat(createSQL_into(values, types));
 		sql = sql.concat(createSQL_values(values, types));
 		
+		System.out.println(sql);
+		
 		Statement statement = null;
 		
 		try {
@@ -105,7 +112,7 @@ public class CashBookDAO extends AbstractDAO {
 			System.out.println("INSERT Err] " + e.getMessage());
 			
 		} finally {
-			DBConnection.close(statement);
+//			DBConnection.close(statement);
 		}
 		
 		if(result > 0) {
@@ -147,7 +154,17 @@ public class CashBookDAO extends AbstractDAO {
 		
 		while(iterator.hasNext()) {
 			String currentKey = iterator.next();
-			sql = sql.concat(", " + values.get(currentKey));
+			
+			switch(types.get(currentKey)) {
+			case STRING:
+				sql = sql.concat(", '" + values.get(currentKey) + "'");
+				break;
+				
+			case INTEGER:
+			case MONEY:
+				sql = sql.concat(", " + values.get(currentKey));
+				break;			
+			}
 		}
 		
 		sql = sql.replaceFirst(", ", "VALUES(");
@@ -155,14 +172,33 @@ public class CashBookDAO extends AbstractDAO {
 		
 		return sql;
 	}
-	
-	
-// DELETE
-	public boolean delete(GetableAttributeNamesDTO _dto) {
-		
-		return true;
-	}
-	
-	
 
+	
+// get tupleCount
+	public int getTupleCount(GetableAttributeNamesDTO _dto) {
+		Map<String, String> values = _dto.getAttributeValues();
+		Map<String, CashBookType> types = _dto.getAttributeTypes();
+		
+		String sql = "SELECT COUNT(*) FROM " + 
+					 _dto.getTableName() + 
+					 createSQL_where(values, types);
+		
+		Statement statement = null;
+		ResultSet resultSet = null;
+		int result = 0;
+		
+		try {
+			statement = getConnection().createStatement();
+			resultSet = statement.executeQuery(sql);
+			
+			while(resultSet.next()) {
+				result = resultSet.getInt("COUNT(*)");
+			}
+			
+		} catch(SQLException e) {
+			System.out.println("CashBookDAO getTupleCount Err] " + e.getMessage());
+		}
+		
+		return result;
+	}
 }

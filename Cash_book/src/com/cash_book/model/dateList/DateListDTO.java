@@ -26,9 +26,9 @@ public class DateListDTO extends GetableAttributeNamesDTO {
 	
 // 생성자
 	public DateListDTO(String _phone, String _localDate) {
-		super("DATA_LIST");
-		this.phone = _phone;
-		this.localDate = _localDate;
+		super("DATE_LIST");		
+		this.phone = checkStringValue(_phone);
+		this.localDate = checkStringValue(_localDate);
 	}
 
 	
@@ -69,8 +69,8 @@ public class DateListDTO extends GetableAttributeNamesDTO {
 	@Override
 	public Map<String, CashBookType> getAttributeTypes() {
 		Map<String, CashBookType> values = new HashMap<String, CashBookType>();
-		values.put(PHONE_NAME, CashBookType.VARCHAR2);
-		values.put(LOCAL_DATE_NAME, CashBookType.VARCHAR2);
+		values.put(PHONE_NAME, CashBookType.STRING);
+		values.put(LOCAL_DATE_NAME, CashBookType.STRING);
 		
 		return values;
 	}

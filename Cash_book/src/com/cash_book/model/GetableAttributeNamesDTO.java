@@ -13,6 +13,24 @@ public abstract class GetableAttributeNamesDTO {
 		this.tableName = _tableName;
 	}
 	
+	// check String value
+	protected String checkStringValue(String _val) {
+		if(_val == null || _val.equals("") || _val.equals("0")) {
+			return " ";
+		}
+		
+		return _val;
+	}
+	
+	// check Money value
+	protected Money checkMoneyValue(String _val) {
+		if(_val == null || _val.equals("") || _val.equals("0")) {
+			return Money.ZERO;
+		}
+		
+		return Money.wons(_val);
+	}
+	
 	
 // getter tableName
 	public String getTableName() {

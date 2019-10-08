@@ -30,9 +30,9 @@ public class MemberDTO extends GetableAttributeNamesDTO {
 // 생성자
 	public MemberDTO(String _phone, String _name, String _pw) {
 		super("MEMBER");
-		this.phone = _phone;
-		this.name = _name;
-		this.pw = _pw;
+		this.phone = checkStringValue(_phone);
+		this.name = checkStringValue(_name);
+		this.pw = checkStringValue(_pw);
 	}
 	
 	
@@ -76,9 +76,9 @@ public class MemberDTO extends GetableAttributeNamesDTO {
 	@Override
 	public Map<String, CashBookType> getAttributeTypes() {
 		Map<String, CashBookType> types = new HashMap<String, CashBookType>();
-		types.put(PHONE_NAME, CashBookType.VARCHAR2);
-		types.put(NAME_NAME, CashBookType.VARCHAR2);
-		types.put(PW_NAME, CashBookType.VARCHAR2);
+		types.put(PHONE_NAME, CashBookType.STRING);
+		types.put(NAME_NAME, CashBookType.STRING);
+		types.put(PW_NAME, CashBookType.STRING);
 		
 		return types;
 	}
@@ -89,12 +89,12 @@ public class MemberDTO extends GetableAttributeNamesDTO {
 	public List<GetableAttributeNamesDTO> getResult(ResultSet _resultSet) {
 		List<GetableAttributeNamesDTO> result = new ArrayList<GetableAttributeNamesDTO>();
 		
-		try {
+		try {			
 			while(_resultSet.next()) {
 				String currentPhone = _resultSet.getString(PHONE_NAME);
 				String currentName = _resultSet.getString(NAME_NAME);
 				String currentPw = _resultSet.getString(PW_NAME);
-				
+
 				GetableAttributeNamesDTO currentDTO = 
 								new MemberDTO(currentPhone, currentName, currentPw);
 				result.add(currentDTO);

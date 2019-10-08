@@ -26,6 +26,8 @@ public class CashBookServlet extends HttpServlet {
 	}
 	
 	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		request.setCharacterEncoding("utf-8");
+
 		String command = request.getParameter("command");
 		System.out.println("CashBookServlet에서의 요청 : " + command);
 		CashBookActionFactory actionFactory = CashBookActionFactory.getInstance();

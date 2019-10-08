@@ -16,6 +16,8 @@ import com.cash_book.model.member.MemberDTO;
 public class JoinAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+
 		String url = "JSPTest/failed.jsp";  
 		
 		String phone = request.getParameter("phone");

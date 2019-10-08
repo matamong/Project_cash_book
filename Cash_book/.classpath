@@ -9,10 +9,10 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/MAJEONGHEE/Desktop/Git/Study/preference/lib/ojdbc6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MAJEONGHEE/Desktop/Git/Study/preference/lib/taglibs-standard-compat-1.2.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MAJEONGHEE/Desktop/Git/Study/preference/lib/taglibs-standard-impl-1.2.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MAJEONGHEE/Desktop/Git/Study/preference/lib/taglibs-standard-jstlel-1.2.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MAJEONGHEE/Desktop/Git/Study/preference/lib/taglibs-standard-spec-1.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Desktop/Project_cash_book/Cash_book/WebContent/WEB-INF/lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Desktop/Project_cash_book/Cash_book/WebContent/WEB-INF/lib/taglibs-standard-compat-1.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Desktop/Project_cash_book/Cash_book/WebContent/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Desktop/Project_cash_book/Cash_book/WebContent/WEB-INF/lib/taglibs-standard-jstlel-1.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Desktop/Project_cash_book/Cash_book/WebContent/WEB-INF/lib/taglibs-standard-spec-1.2.5.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
